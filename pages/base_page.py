@@ -3,8 +3,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 
 class BasePage:
-    def __init__(self, driver):
+    def __init__(self, driver, user):
         self.driver = driver
+        self.user = user
 
     def open(self, url):
         self.driver.get(url)
