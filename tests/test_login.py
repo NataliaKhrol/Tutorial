@@ -2,20 +2,19 @@ import time
 
 import pytest
 
+from conftest import login_as
 from data.user_factory import UserFactory
+from pages import login_page
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 
 
 class TestLoginPage:
 
-    def test_correct_login(self, driver):
+    def test_correct_login(self, driver, login_as):
         user = UserFactory.admin()
-        login_page = LoginPage(driver, user)
         products_page = ProductsPage(driver, user)
-        login_page.open("https://www.saucedemo.com/")
-        time.sleep(3)
-        login_page.fill_in_login_form()
+        login_as(user)
         time.sleep(5)
 
         assert products_page.page_is_open() == True
@@ -33,12 +32,8 @@ class TestLoginPage:
         ]
     )
 
-    def test_incorrect_login(self, driver, user, error_message):
-       # user = UserFactory.locked()
-        login_page = LoginPage(driver, user)
-        login_page.open("https://www.saucedemo.com/")
-        time.sleep(3)
-        login_page.fill_in_login_form()
+    def test_incorrect_login(self, driver, login_as, user, error_message):
+        login_page: LoginPage = login_as(user)
         time.sleep(5)
 
         assert login_page.is_error_message_appear(), "Сообщение об ошибке не появилось для заблокированного юзера"

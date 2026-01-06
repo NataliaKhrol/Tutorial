@@ -3,6 +3,9 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
+from config import BASE_URL
+from pages.login_page import LoginPage
+
 
 @pytest.fixture(scope='function')
 def driver():
@@ -12,3 +15,14 @@ def driver():
     # driver.maximize_window()
     yield driver
     driver.quit()
+
+
+@pytest.fixture
+def login_as(driver):
+    def _login_as(user):
+        page = LoginPage(driver, user)
+        page.open(BASE_URL)
+        page.fill_in_login_form()
+        return page
+
+    return _login_as
