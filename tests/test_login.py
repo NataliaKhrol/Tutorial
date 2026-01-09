@@ -4,7 +4,6 @@ import pytest
 
 from conftest import login_as
 from data.user_factory import UserFactory
-from pages import login_page
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 
