@@ -1,5 +1,6 @@
 import time
 
+import allure
 from selenium.common import TimeoutException
 from selenium.webdriver import Keys
 
@@ -10,10 +11,12 @@ from pages.base_page import BasePage
 class LoginPage(BasePage):
     locators = LoginPageLocators()
 
+    @allure.step("Заполнить форму логина")
     def fill_in_login_form(self):
         self.element_is_visible(self.locators.USER_INPUT).send_keys(self.user.username)
         self.element_is_visible(self.locators.USER_INPUT).send_keys(Keys.CONTROL + "a")
         self.element_is_visible(self.locators.USER_INPUT).send_keys(Keys.BACK_SPACE)
+        #self.element_is_visible(self.locators.USER_INPUT).clear()
         time.sleep(3)
         self.element_is_visible(self.locators.USER_INPUT).send_keys(self.user.username)
         self.element_is_visible(self.locators.PASSWORD_INPUT).send_keys(self.user.password)
