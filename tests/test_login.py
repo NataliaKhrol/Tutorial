@@ -4,7 +4,7 @@ import pytest
 
 from conftest import login_as
 from data.user_factory import UserFactory
-from pages import login_page
+from enums.page_titles import PageTitle
 from pages.login_page import LoginPage
 from pages.products_page import ProductsPage
 
@@ -18,7 +18,7 @@ class TestLoginPage:
         time.sleep(5)
 
         assert products_page.page_is_open() == True
-        assert products_page.check_title() == "Products"
+        assert products_page.check_title() == PageTitle.PRODUCTS.value
 
     @pytest.mark.parametrize(
         "user, error_message",
