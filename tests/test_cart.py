@@ -1,12 +1,16 @@
 import time
 
+import allure
+
 from data.user_factory import UserFactory
 from enums.page_titles import PageTitle
 from pages.cart_page import CartPage
 from pages.products_page import ProductsPage
 
-
+@allure.epic("Магазин Sauce Demo")
+@allure.feature("Витрина товаров")
 class TestCartPage:
+
     def test_check_goods_in_cart(self, driver, login_as):
         user = UserFactory.admin()
         cart_page = CartPage(driver, user)
