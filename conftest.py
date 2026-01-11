@@ -61,8 +61,6 @@ def login_as(driver):
     return _login_as
 
 
-
-
 # import pytest
 # from selenium import webdriver
 # from selenium.webdriver.chrome.options import Options
